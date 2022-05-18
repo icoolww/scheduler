@@ -8,14 +8,10 @@ import classNames from "classnames";
 export default function DayListItem(props) {
   
   
-  
-  
   const dayClass = classNames("day-list__item", {
     "day-list__item--selected": props.selected,
     "day-list__item--full": props.spots === 0,
-    
   });
-
   
        const formatSpots = function (spot) {
         let result = "";
@@ -30,8 +26,6 @@ export default function DayListItem(props) {
         }
         return result;
       }
-  
-  
   
   return (
     <li className={dayClass} onClick={() => props.setDay(props.name)}>
