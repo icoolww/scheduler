@@ -19,13 +19,14 @@ export default function InterviewerList (props) {
 
     return (
       <InterviewerListItem 
-        id={interviewer.id}
+        // id={interviewer.id}
         key={interviewer.id}
         name={interviewer.name}
         avatar={interviewer.avatar}
         selected={props.interviewer === interviewer.id}
-        setInterviewer={props.setInterviewer}
-       
+        // setInterviewer={props.setInterviewer}
+        setInterviewer={() => props.setInterviewer(interviewer.id)}
+        // after refactoring
       />
     )
   })
