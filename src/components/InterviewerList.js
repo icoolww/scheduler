@@ -25,7 +25,7 @@ export default function InterviewerList (props) {
         name={interviewer.name}
         avatar={interviewer.avatar}
         // selected={props.interviewer === interviewer.id}
-        selected={props.value === interviewer.id}
+        selected={props.value === interviewer.id} // if props.value isnt exist, its falsy
         // setInterviewer={props.setInterviewer}
         // setInterviewer={() => props.setInterviewer(interviewer.id)}
 
