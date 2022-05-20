@@ -49,9 +49,25 @@ const appointments = {
 
 
 export default function Application(props) {
+
+  const setDay = day => setState({ ...state, day });
+
+  const setDays = (days) => {
+    // setState ({ ...state, days })
+    setState(prev => ({ ...prev, days }));
+  }
   
-  const [day, setDay] = useState("Monday");
-  const [days, setDays] = useState([]);
+  // const [day, setDay] = useState("Monday");
+  // const [days, setDays] = useState([]);
+
+  const [state, setState] = useState({
+    day: "Monday",
+    days: [],
+    // you may put the line below, but will have to remove/comment hardcoded appointments variable
+    appointments: {}
+  });
+
+
   
   // const [value, onChange] = useState("Monday");
   
@@ -94,8 +110,8 @@ export default function Application(props) {
         <hr className="sidebar__separator sidebar--centered" />
         <nav className="sidebar__menu">
           <DayList
-              days={days}
-              day={day}
+              days={state.days}
+              day={state.day}
               setDay={setDay}
           />
         </nav>
