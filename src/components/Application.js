@@ -64,11 +64,26 @@ export default function Application(props) {
   const [state, setState] = useState({
     day: "Monday",
     days: [],
-    // you may put the line below, but will have to remove/comment hardcoded appointments variable
-    appointments: {}
+    appointments: {},
+    interviewers: {}
   });
 
   const dailyAppointments = getAppointmentsForDay(state, state.day);
+
+  // const schedule = dailyAppointments.map((appointment) => {
+  //   const interview = getInterview(state, appointment.interview);
+
+  //   return (
+  //     <Appointment
+  //       key={appointment.id}
+  //       id={appointment.id}
+  //       time={appointment.time}
+  //       interview={interview}
+  //     />
+  //   );
+  // });
+ 
+
   
   useEffect(() => {
     Promise.all([
@@ -115,10 +130,11 @@ export default function Application(props) {
           // time={appointment.time} 
           // interview={appointment.interview}
           {...appointment} 
-          // is equal to line 81 - 83
+          // is equal to 3 codes above
           />
     )
   })
+
   
   return (
     <main className="layout">
