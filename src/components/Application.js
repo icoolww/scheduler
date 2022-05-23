@@ -57,7 +57,7 @@ export default function Application(props) {
   //   // setState ({ ...state, days })
   //   setState(prev => ({ ...prev, days }));
   // }
-  
+
   // const [day, setDay] = useState("Monday");
   // const [days, setDays] = useState([]);
 
@@ -84,123 +84,121 @@ export default function Application(props) {
   //     />
   //   );
   // });
- 
 
-  
+
+
   useEffect(() => {
     Promise.all([
-      axios.get('api/days'),
-      axios.get('api/appointments'),
-      axios.get('api/interviewers')
+      axios.get(`api/days`),
+      axios.get(`api/appointments`),
+      axios.get(`api/interviewers`)
     ])
-    .then((all) => {
-      // console.log("all", all)
-      // console.log("all[0].data", all[0].data); // days
-      // console.log("all[1].data", all[1].data); // appointments
-      // console.log("all[2].data", all[2].data); // interviewers
-      setState(prev => (
-        {...prev,
-          days: all[0].data,
-          appointments: all[1].data,
-          interviewers: all[2].data
-        }));
+      .then((all) => {
+        // console.log("all", all)
+        // console.log("all[0].data", all[0].data); // days
+        // console.log("all[1].data", all[1].data); // appointments
+        // console.log("all[2].data", all[2].data); // interviewers
+        setState(prev => (
+          {
+            ...prev,
+            days: all[0].data,
+            appointments: all[1].data,
+            interviewers: all[2].data
+          }));
       })
-    }, [])
+  }, [])
 
-    function bookInterview (id, interview) {
-      console.log("id, interview", id, interview);
+  function bookInterview(id, interview) {
+    console.log("id, interview", id, interview);
 
-      const appointment = {
-        ...state.appointments[id],
-        interview: { ...interview }
-      };
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview }
+    };
 
-      const appointments = {
-        ...state.appointments,
-        [id]: appointment
-      };
-      
-      // console.log('test state', state);
-      
-      setState({
-        ...state,
-        appointments
-      });
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+
+
+    // setState({
+    //   ...state,
+    //   appointments
+    // });
 
     
+    return axios
+      .put(`api/appointments/${id}`, {interview})
+      .then(res => {
+        setState({
+          ...state,
+          appointments
+        });
+      })
+  }
 
-    }
-    
-    // const dailyAppointments = [];
-  
-  // });
-  
-  // useEffect(() => {
-  //   axios
-  //     .get(`/api/days`)
-  //     .then(response => {
-  //       // console.log("response", response)
-  //       // const test = ["test"]
-  //       setDays(response.data)
-  //     })
-  //   }, [])
-    
-    // console.log("days", days)
+  // transition(SHOW)
 
-  const arrayComponents = 
-    Object.values(dailyAppointments).map((appointment) => {
+
+
+
+
+const arrayComponents =
+  Object.values(dailyAppointments).map((appointment) => {
 
     return (
       <Appointment
-          key={appointment.id} 
-          interviewers={dailyInterviewers}
-          bookInterview={bookInterview}
-          
-          id={appointment.id} 
-          time={appointment.time} 
-          interview={appointment.interview}
-          // {...appointment} 
-          // // is equal to 3 codes above
-          />
+        key={appointment.id}
+        interviewers={dailyInterviewers}
+        bookInterview={bookInterview}
+
+        id={appointment.id}
+        time={appointment.time}
+        interview={appointment.interview}
+      // {...appointment} 
+      // // is equal to 3 codes above
+      />
     )
   })
 
-  
-  return (
-    <main className="layout">
-      <section className="sidebar">
+
+return (
+  <main className="layout">
+    <section className="sidebar">
       <img
         className="sidebar--centered"
         src="images/logo.png"
         alt="Interview Scheduler"
       />
-        <hr className="sidebar__separator sidebar--centered" />
-        <nav className="sidebar__menu">
-          <DayList
-              days={state.days}
-              day={state.day}
-              setDay={setDay}
-          />
-        </nav>
-        <img
-          className="sidebar__lhl sidebar--centered"
-          src="images/lhl.png"
-          alt="Lighthouse Labs"
+      <hr className="sidebar__separator sidebar--centered" />
+      <nav className="sidebar__menu">
+        <DayList
+          days={state.days}
+          day={state.day}
+          setDay={setDay}
         />
-      </section>
-      <section className="schedule">
+      </nav>
+      <img
+        className="sidebar__lhl sidebar--centered"
+        src="images/lhl.png"
+        alt="Lighthouse Labs"
+      />
+    </section>
+    <section className="schedule">
 
-        {arrayComponents}
+      {arrayComponents}
 
-        {/* <Appointment
+      {/* <Appointment
           key="last"
           time="5pm" /> */}
 
-      </section>
-    </main>
-    
-  );
+    </section>
+  </main>
+
+);
 }
+
 
 
 // {Object.values(appointments).map()}
