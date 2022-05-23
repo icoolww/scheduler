@@ -106,6 +106,30 @@ export default function Application(props) {
         }));
       })
     }, [])
+
+    function bookInterview (id, interview) {
+      console.log("id, interview", id, interview);
+
+      const appointment = {
+        ...state.appointments[id],
+        interview: { ...interview }
+      };
+
+      const appointments = {
+        ...state.appointments,
+        [id]: appointment
+      };
+      
+      // console.log('test state', state);
+      
+      setState({
+        ...state,
+        appointments
+      });
+
+    
+
+    }
     
     // const dailyAppointments = [];
   
@@ -130,12 +154,13 @@ export default function Application(props) {
       <Appointment
           key={appointment.id} 
           interviewers={dailyInterviewers}
+          bookInterview={bookInterview}
           
-          // id={appointment.id} 
-          // time={appointment.time} 
-          // interview={appointment.interview}
-          {...appointment} 
-          // is equal to 3 codes above
+          id={appointment.id} 
+          time={appointment.time} 
+          interview={appointment.interview}
+          // {...appointment} 
+          // // is equal to 3 codes above
           />
     )
   })
