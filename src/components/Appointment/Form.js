@@ -4,10 +4,11 @@ import React, { useState } from 'react';
 
 import Button from "components/Button";
 import InterviewerList from "components/InterviewerList";
+import { getInterviewersForDay } from 'helpers/selectors';
 
 export default function Form (props) {
 
-  console.log("props", props)
+  // console.log("props", props)
 
   const [student, setStudent] = useState(props.student || "");
   const [interviewer, setInterviewer] = useState(props.interviewers || null);

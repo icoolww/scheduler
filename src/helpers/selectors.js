@@ -38,10 +38,10 @@ export function getInterview(state, interview) {
 
     let interviewerId = newInterview.interviewer;
     // console.log("Id", InterviewId) got id 2
-    console.log("state", state)
+    // console.log("state", state)
 
     let interviewer = state.interviewers[interviewerId];
-    console.log("interviewer", interviewer) 
+    // console.log("interviewer", interviewer) 
     // equals id. name, avatar of interviewer
 
     // works !
@@ -51,7 +51,7 @@ export function getInterview(state, interview) {
     // interviewerId = interviewer;
     // interviewer = newInterview.interviewer
 
-    console.log("interview", interview)
+    // console.log("interview", interview)
     
     return newInterview;
   }
@@ -64,3 +64,24 @@ export function getInterview(state, interview) {
 // Otherwise, the function should return null.
 
 
+export function getInterviewersForDay(state, day) {
+  //... returns an array of interviewer for that day
+  console.log("state", state)
+
+  // 1
+const intObject = state.days.find( ({ name }) =>  name === day)
+console.log("intObject", intObject)
+
+// 3
+if (intObject === undefined) {
+  return [];
+}
+
+// 2
+const resultArray = intObject.interviewers.map ((interviewer) => state.interviewers[interviewer] )
+// const resultArray =
+//   intObject.appointments.map (() => state.interviewers )
+console.log("resultArray", resultArray)
+
+return resultArray;
+} 
