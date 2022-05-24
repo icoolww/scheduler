@@ -32,7 +32,7 @@ export default function Appointment(props) {
 
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
-  );
+  ); 
 
   const onAdd = function () {
     transition(CREATE);

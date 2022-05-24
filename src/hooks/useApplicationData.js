@@ -25,7 +25,7 @@ export const useApplicationData = () => {
       // console.log("all[1].data", all[1].data); // appointments
       // console.log("all[2].data", all[2].data); // interviewers
       setState((prev) => ({
-        ...prev,
+        ...prev, 
         days: all[0].data,
         appointments: all[1].data,
         interviewers: all[2].data,
