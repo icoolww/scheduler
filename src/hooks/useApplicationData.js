@@ -75,5 +75,40 @@ export const useApplicationData = () => {
     });
   }
 
+  
+//   return { setDay, state, bookInterview, cancelInterview, spots };
+// };
+
+
+
+// updating remaining spots
+const countSpots = (state) => {
+  const currentDay = state.days.find((day) => day.name === state.day);
+  // 
+  const appointmentIds = currentDay.appointments;
+
+  const spots = appointmentIds.filter((id) => !state.appointments[id]).length;
+  // iterating over appoinmentIds, skip where interview isn't null
+
+  return spots;
+  }
+
+  const updateSpots = (state) => {
+    const updatedState = {...state};
+    const updatedDays = [...state.days];
+    const updatedDay = {...state.days.find((day) => day.name === state.day)};
+
+    const spots = countSpots(state);
+    updatedDays.spots = spots;
+
+    const updatedDayIndex = state.days.findIndex(day => day.name === state.day);
+    updatedDays[updatedDayIndex] = updatedDay;
+
+    updatedState.days = updatedDays;
+
+    return updatedState;
+
+  }
+
   return { setDay, state, bookInterview, cancelInterview };
 };
