@@ -8,11 +8,15 @@ import Empty from "./Empty";
 import useVisualMode from "hooks/useVisualMode";
 import Form from "./Form";
 import Status from "./Status";
+import Confirm from "./Confirm";
 
 const EMPTY = "EMPTY";
-const SHOW = "SHOW";
 const CREATE = "CREATE";
 const SAVING = "SAVING";
+const SHOW = "SHOW";
+const CONFIRM = "CONFIRM";
+const DELETING = "DELETING";
+
 
 export default function Appointment(props) {
   // console.log("props", props )
@@ -36,21 +40,26 @@ export default function Appointment(props) {
       student: name,
       interviewer,
     };
-
-    transition(SAVING, true);
-    props.bookInterview(props.id, interview)
-    .then(transition(SHOW));
-    
-
-    // console.log("props.id", props.id)
-    // console.group("interview", interview)
+    transition(SAVING);
+    props.bookInterview(props.id, interview).then(()=>{
+      transition(SHOW)
+    })
   }
 
-  console.log("test interviewer name", props.interview);
+  function deleteInterview() {
+        transition(DELETING)
+      props.cancelInterview(props.id).then(()=>{
+        transition(EMPTY)
+      })
+  }
+
+  // console.log("test interviewer name", props.interview);
 
   return (
     <article className="appointment">
       <Header time={props.time} />
+
+      {mode === EMPTY && <Empty onAdd={onAdd} />}
 
       {mode === CREATE && (
         <Form
@@ -63,16 +72,24 @@ export default function Appointment(props) {
 
       {mode === SAVING && (
         <Status message={mode} />
-        // <Status message="Saving" />
       )}
 
-      {(props.interview && (
+      {mode === SHOW && (
         <Show
           student={props.interview.student}
-          // interviewer={props.interview.interviewer}
-          interviewer={interviewer.name || null}
+          interviewer={props.interview.interviewer}
+          onDelete={()=>{transition(CONFIRM)}}
         />
-      )) || <Empty onAdd={onAdd} />}
+      )}
+
+      {mode === CONFIRM && <Confirm
+          message="Delete the appointment?" 
+          onConfirm={()=>{deleteInterview()}}
+          onCancel={() => back()} />}
+
+      {mode === DELETING && <Status message={mode} />}
+
+      
     </article>
   );
 }
