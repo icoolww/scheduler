@@ -45,15 +45,15 @@ export default function Appointment(props) {
     };
     transition(SAVING, true);
     props.bookInterview(props.id, interview).then(() => {
-      transition(SHOW).catch((err) => transition(ERROR_SAVE, true));
-    });
+      transition(SHOW);
+    }).catch((err) => transition(ERROR_SAVE, true));
   }
 
   function deleteInterview() {
     transition(DELETING, true);
     props.cancelInterview(props.id).then(() => {
-      transition(EMPTY).catch((err) => transition(ERROR_DELETE, true));
-    });
+      transition(EMPTY);
+    }).catch((err) => transition(ERROR_DELETE, true));
   }
 
   function onEdit() {
@@ -72,7 +72,7 @@ export default function Appointment(props) {
         <Form
           student={[]}
           interviewers={props.interviewers}
-          cancel={() => back()}
+          cancel={() => back}
           // onSave={() => save()}
           onSave={save}
         />
