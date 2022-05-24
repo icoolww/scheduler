@@ -77,7 +77,6 @@ export default function Application(props) {
   }
 
   function cancelInterview(id) {
-
     const appointment = {
       ...state.appointments[id],
       interview: null,
@@ -87,7 +86,7 @@ export default function Application(props) {
       ...state.appointments,
       [id]: appointment,
     };
-    
+
     return axios.delete(`api/appointments/${id}`).then((res) => {
       setState({
         ...state,

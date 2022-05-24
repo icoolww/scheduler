@@ -16,7 +16,7 @@ const SAVING = "SAVING";
 const SHOW = "SHOW";
 const CONFIRM = "CONFIRM";
 const DELETING = "DELETING";
-
+const EDIT = "EDIT";
 
 export default function Appointment(props) {
   // console.log("props", props )
@@ -41,16 +41,20 @@ export default function Appointment(props) {
       interviewer,
     };
     transition(SAVING);
-    props.bookInterview(props.id, interview).then(()=>{
-      transition(SHOW)
-    })
+    props.bookInterview(props.id, interview).then(() => {
+      transition(SHOW);
+    });
   }
 
   function deleteInterview() {
-        transition(DELETING)
-      props.cancelInterview(props.id).then(()=>{
-        transition(EMPTY)
-      })
+    transition(DELETING);
+    props.cancelInterview(props.id).then(() => {
+      transition(EMPTY);
+    });
+  }
+
+  function onEdit() {
+    transition(EDIT);
   }
 
   // console.log("test interviewer name", props.interview);
@@ -70,26 +74,39 @@ export default function Appointment(props) {
         />
       )}
 
-      {mode === SAVING && (
-        <Status message={mode} />
-      )}
+      {mode === SAVING && <Status message={mode} />}
 
       {mode === SHOW && (
         <Show
           student={props.interview.student}
           interviewer={props.interview.interviewer}
-          onDelete={()=>{transition(CONFIRM)}}
+          onDelete={() => {
+            transition(CONFIRM);
+          }}
+          onEdit={() => onEdit()}
         />
       )}
 
-      {mode === CONFIRM && <Confirm
-          message="Delete the appointment?" 
-          onConfirm={()=>{deleteInterview()}}
-          onCancel={() => back()} />}
+      {mode === CONFIRM && (
+        <Confirm
+          message="Delete the appointment?"
+          onConfirm={() => {
+            deleteInterview();
+          }}
+          onCancel={() => back()}
+        />
+      )}
 
       {mode === DELETING && <Status message={mode} />}
 
-      
+      {mode === EDIT && (
+        <Form
+          student={props.interview.student}
+          interviewers={props.interviewers}
+          cancel={() => back()}
+          onSave={save}
+        />
+      )}
     </article>
   );
 }
