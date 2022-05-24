@@ -8,13 +8,6 @@ import PropTypes from 'prop-types'
 export default function InterviewerList (props) {
   // console.log("props", props)
 
-
-
-  InterviewerList.propTypes = {
-    interviewers: PropTypes.array.isRequired
-  }
-
-
   const interviewerList = props.interviewers.map ((interviewer) => {
     // console.log("interviewer", interviewer)
 
@@ -50,4 +43,8 @@ export default function InterviewerList (props) {
       <ul className="interviewers__list">{interviewerList}</ul>
     </section>
   )
+}
+
+InterviewerList.propTypes = {
+  interviewers: PropTypes.array.isRequired
 }

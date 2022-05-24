@@ -38,6 +38,7 @@ export default function Form (props) {
               placeholder="Enter Student Name"
               value={student}
               onChange={(event) => setStudent(event.target.value)}
+              data-testid="student-name-input"
               /*
               This must be a controlled component
               your code goes here
@@ -65,4 +66,3 @@ export default function Form (props) {
   
     )
   }
-  
