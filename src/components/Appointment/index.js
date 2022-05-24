@@ -44,16 +44,22 @@ export default function Appointment(props) {
       interviewer,
     };
     transition(SAVING, true);
-    props.bookInterview(props.id, interview).then(() => {
-      transition(SHOW);
-    }).catch((err) => transition(ERROR_SAVE, true));
+    props
+      .bookInterview(props.id, interview)
+      .then(() => {
+        transition(SHOW);
+      })
+      .catch((err) => transition(ERROR_SAVE, true));
   }
 
   function deleteInterview() {
     transition(DELETING, true);
-    props.cancelInterview(props.id).then(() => {
-      transition(EMPTY);
-    }).catch((err) => transition(ERROR_DELETE, true));
+    props
+      .cancelInterview(props.id)
+      .then(() => {
+        transition(EMPTY);
+      })
+      .catch((err) => transition(ERROR_DELETE, true));
   }
 
   function onEdit() {
@@ -72,7 +78,7 @@ export default function Appointment(props) {
         <Form
           student={[]}
           interviewers={props.interviewers}
-          cancel={() => back}
+          cancel={() => back()}
           // onSave={() => save()}
           onSave={save}
         />
@@ -83,7 +89,7 @@ export default function Appointment(props) {
       {mode === SHOW && (
         <Show
           student={props.interview.student}
-          interviewer={props.interview.interviewer}
+          interviewer={interviewer.name}
           onDelete={() => {
             transition(CONFIRM);
           }}
@@ -114,15 +120,11 @@ export default function Appointment(props) {
       )}
 
       {mode === ERROR_DELETE && (
-        <Error
-          message="Could not delete appointment"
-          onClose={() => back()} />
+        <Error message="Could not delete appointment" onClose={() => back()} />
       )}
 
       {mode === ERROR_SAVE && (
-        <Error
-          message="Could not save appointment"
-          onClose={() => back()} />
+        <Error message="Could not save appointment" onClose={() => back()} />
       )}
     </article>
   );
