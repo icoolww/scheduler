@@ -70,6 +70,7 @@ export default function Appointment(props) {
           student={[]}
           interviewers={props.interviewers}
           cancel={() => back()}
+          // onSave={() => save()}
           onSave={save}
         />
       )}
@@ -104,6 +105,7 @@ export default function Appointment(props) {
           student={props.interview.student}
           interviewers={props.interviewers}
           cancel={() => back()}
+          // onSave={() => save()}
           onSave={save}
         />
       )}
