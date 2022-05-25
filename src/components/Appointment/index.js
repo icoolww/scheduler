@@ -39,6 +39,7 @@ export default function Appointment(props) {
   };
 
   function save(name, interviewer) {
+    console.log('test', name, interviewer)
     const interview = {
       student: name,
       interviewer,
@@ -76,7 +77,6 @@ export default function Appointment(props) {
 
       {mode === CREATE && (
         <Form
-          student={[]}
           interviewers={props.interviewers}
           cancel={() => back()}
           // onSave={() => save()}
@@ -89,7 +89,7 @@ export default function Appointment(props) {
       {mode === SHOW && (
         <Show
           student={props.interview.student}
-          interviewer={interviewer.name}
+          interviewer={interviewer ? interviewer.name : ''}
           onDelete={() => {
             transition(CONFIRM);
           }}
@@ -111,8 +111,9 @@ export default function Appointment(props) {
 
       {mode === EDIT && (
         <Form
-          student={props.interview.student}
+          name={props.interview.student}
           interviewers={props.interviewers}
+          interviewer={interviewer}
           cancel={() => back()}
           // onSave={() => save()}
           onSave={save}

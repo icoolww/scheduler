@@ -93,6 +93,7 @@ export const useApplicationData = () => {
 
     const spots = appointmentIds.filter((id) => !state.appointments[id].interview).length;
     // iterating over appoinmentIds, skip where interview isn't null
+    console.log("spots", spots)
 
     return spots;
   }

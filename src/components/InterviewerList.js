@@ -26,11 +26,11 @@ export default function InterviewerList (props) {
         name={interviewer.name}
         avatar={interviewer.avatar}
         // selected={props.interviewer === interviewer.id}
-        selected={props.value === interviewer.id} // if props.value isnt exist, its falsy
+        selected={Boolean(props.value) && props.value.id === interviewer.id} // if props.value isnt exist, its falsy
         // setInterviewer={props.setInterviewer}
         // setInterviewer={() => props.setInterviewer(interviewer.id)}
 
-        setInterviewer={() => props.onChange(interviewer.id)}
+        setInterviewer={() => props.onChange(interviewer)}
 
         // after refactoring
       />

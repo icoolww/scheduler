@@ -10,10 +10,24 @@ export default function Form (props) {
 
   // console.log("props", props)
 
-  const [student, setStudent] = useState(props.student || "");
-  const [interviewer, setInterviewer] = useState(props.interviewers || null);
+  const [student, setStudent] = useState(props.name || "");
+  const [interviewer, setInterviewer] = useState(props.interviewer || null);
   // console.log("props interviewer", props.interviewers);
 
+  const [error, setError] = useState("");
+
+
+  function validate() {
+    if (student === "") {
+      setError("Student name cannot be blank");
+      return;
+    }
+    if (interviewer === null) {
+      setError("Please select an interviewer");
+      return;
+    }
+    props.onSave(student, interviewer.id);
+  }
 
 
   const reset = () => {
@@ -39,15 +53,19 @@ export default function Form (props) {
               value={student}
               onChange={(event) => setStudent(event.target.value)}
               data-testid="student-name-input"
+              
               /*
               This must be a controlled component
               your code goes here
               */
             />
           </form>
+
+          <section className="appointment__validation">{error}</section>
+
             <InterviewerList 
               interviewers={props.interviewers}
-              // interviewers={interviewer}
+              // interviewers={interviewers}
               // onChange={(event) => setInterviewer(event.target.value)}
               onChange={setInterviewer}
               value={interviewer}
@@ -59,7 +77,7 @@ export default function Form (props) {
             <Button danger onClick={cancel}>Cancel</Button>
 
 
-            <Button confirm onClick={() => props.onSave(student, interviewer)}>Save</Button>
+            <Button confirm onClick={validate}>Save</Button>
           </section>
       </section>
     </main>
