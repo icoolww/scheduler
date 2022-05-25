@@ -22,11 +22,14 @@ export default function Form (props) {
       setError("Student name cannot be blank");
       return;
     }
-    if (interviewer === null) {
-      setError("Please select an interviewer");
-      return;
-    }
-    props.onSave(student, interviewer.id);
+    // if (interviewer === null) {
+    //   setError("Please select an interviewer");
+    //   return;
+    // }
+
+    setError("");
+    props.onSave(student, interviewer);
+    // props.onSave(student, interviewer.id);
   }
 
 
@@ -37,7 +40,7 @@ export default function Form (props) {
 
   const cancel = () => {
     reset();
-    props.cancel();
+    props.onCancel();
   }
 
 
