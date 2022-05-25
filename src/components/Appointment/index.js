@@ -42,7 +42,7 @@ export default function Appointment(props) {
     console.log('test', name, interviewer)
     const interview = {
       student: name,
-      interviewer,
+      interviewer: interviewer.id,
     };
     transition(SAVING, true);
     props
