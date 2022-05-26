@@ -14,16 +14,14 @@ export const useApplicationData = () => {
     interviewers: {},
   });
 
+  // returns an array
   useEffect(() => {
     Promise.all([
       axios.get(`api/days`),
       axios.get(`api/appointments`),
       axios.get(`api/interviewers`),
     ]).then((all) => {
-      // console.log("all", all)
-      // console.log("all[0].data", all[0].data); // days
-      // console.log("all[1].data", all[1].data); // appointments
-      // console.log("all[2].data", all[2].data); // interviewers
+
       setState((prev) => ({
         ...prev, 
         days: all[0].data,
@@ -36,7 +34,6 @@ export const useApplicationData = () => {
   const setDay = (day) => setState({ ...state, day });
 
   function bookInterview(id, interview) {
-    // console.log("id, interview", id, interview);
 
     const appointment = {
       ...state.appointments[id],
@@ -79,12 +76,6 @@ export const useApplicationData = () => {
     });
   }
 
-  
-//   return { setDay, state, bookInterview, cancelInterview, spots };
-// };
-
-
-
 // updating remaining spots
   const countSpots = (state) => {
     const currentDay = state.days.find((day) => day.name === state.day);
@@ -93,7 +84,6 @@ export const useApplicationData = () => {
 
     const spots = appointmentIds.filter((id) => !state.appointments[id].interview).length;
     // iterating over appoinmentIds, skip where interview isn't null
-    console.log("spots", spots)
 
     return spots;
   }

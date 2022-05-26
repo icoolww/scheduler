@@ -22,8 +22,6 @@ const ERROR_SAVE = "ERROR_SAVE";
 const ERROR_DELETE = "ERROR_DELETE";
 
 export default function Appointment(props) {
-  // console.log("props appointment", props )
-
   const interviewer = props.interviewers.find(
     (interviewer) =>
       props.interview && interviewer.id === props.interview.interviewer
@@ -32,14 +30,13 @@ export default function Appointment(props) {
 
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
-  ); 
+  );
 
   const onAdd = function () {
     transition(CREATE);
   };
 
   function save(name, interviewer) {
-    console.log('test', name, interviewer)
     const interview = {
       student: name,
       interviewer: interviewer.id,
@@ -67,8 +64,6 @@ export default function Appointment(props) {
     transition(EDIT);
   }
 
-  // console.log("test interviewer name", props.interview);
-
   return (
     <article className="appointment">
       <Header time={props.time} />
@@ -89,7 +84,7 @@ export default function Appointment(props) {
       {mode === SHOW && (
         <Show
           student={props.interview.student}
-          interviewer={interviewer ? interviewer.name : ''}
+          interviewer={interviewer ? interviewer.name : ""}
           onDelete={() => {
             transition(CONFIRM);
           }}
@@ -107,8 +102,6 @@ export default function Appointment(props) {
         />
       )}
 
-      {/* {mode === DELETING && <Status message="DELETING" />} */}
-
       {mode === DELETING && <Status message={mode} />}
 
       {mode === EDIT && (
@@ -117,7 +110,7 @@ export default function Appointment(props) {
           interviewers={props.interviewers}
           interviewer={interviewer}
           onCancel={() => back()}
-          // onSave={() => save()}
+          
           onSave={save}
         />
       )}
