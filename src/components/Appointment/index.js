@@ -22,7 +22,7 @@ const ERROR_SAVE = "ERROR_SAVE";
 const ERROR_DELETE = "ERROR_DELETE";
 
 export default function Appointment(props) {
-  // console.log("props", props )
+  // console.log("props appointment", props )
 
   const interviewer = props.interviewers.find(
     (interviewer) =>

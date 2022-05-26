@@ -56,9 +56,10 @@ export default function Application(props) {
       <section className="schedule">
         {arrayComponents}
 
-        {/* <Appointment
+        <Appointment
+          interviewers={dailyInterviewers}
           key="last"
-          time="5pm" /> */}
+          time="5pm" />
       </section>
     </main>
   );

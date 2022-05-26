@@ -8,9 +8,9 @@ describe("Navigation", () => {
     // cy.get("li");
     // .contains("Tuesday").click();
 
-    cy.contains("[data-testid=day]", "Tuesday")
+    cy.contains("[data-testid=Tuesday]", "Tuesday")
       .click()
-      .should("have.class", "day-list__item--selected");
+      .should("have.class", "day-list__item--selected")
   });
 
   
