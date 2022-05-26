@@ -1,28 +1,25 @@
 import React from "react";
 import classNames from "classnames";
 
-
 import "components/Button.scss";
 
 // after refactoring
 export default function Button(props) {
-   const buttonClass = classNames("button", {
-      "button--confirm": props.confirm,
-      "button--danger": props.danger
-   });
+  const buttonClass = classNames("button", {
+    "button--confirm": props.confirm,
+    "button--danger": props.danger,
+  });
 
-   return (
-      <button
+  return (
+    <button
       className={buttonClass}
       onClick={props.onClick}
       disabled={props.disabled}
-      >
-         {props.children}
-      </button>
-   );
+    >
+      {props.children}
+    </button>
+  );
 }
-
-
 
 // before refactoring
 // export default function Button(props) {
@@ -30,12 +27,11 @@ export default function Button(props) {
 
 //    if (props.confirm) {
 //      buttonClass += " button--confirm";
-//    } 
-   
+//    }
+
 //    if (props.danger) {
 //       buttonClass += " button--danger";
 //    }
-
 
 //    return (
 //       <button

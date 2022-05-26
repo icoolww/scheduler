@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 
-// import "components/Appointment/styles.scss";
 
 import Button from "components/Button";
 import InterviewerList from "components/InterviewerList";
@@ -19,7 +18,7 @@ export default function Form(props) {
 
     setError("");
     props.onSave(student, interviewer);
-    // props.onSave(student, interviewer.id);
+    
   }
 
   const reset = () => {

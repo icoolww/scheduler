@@ -1,7 +1,5 @@
 import React from "react";
 
-// import "components/Appointment/styles.scss";
-
 
 
 export default function Error (props) {
@@ -17,7 +15,7 @@ export default function Error (props) {
     <img
       className="appointment__error-close"
       src="images/close.png"
-      // alt={props.message}
+      
       alt="Close"
       onClick={props.onClose}
     />
