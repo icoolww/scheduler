@@ -107,6 +107,8 @@ export default function Appointment(props) {
         />
       )}
 
+      {/* {mode === DELETING && <Status message="DELETING" />} */}
+
       {mode === DELETING && <Status message={mode} />}
 
       {mode === EDIT && (
